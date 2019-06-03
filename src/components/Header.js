@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {NavLink} from 'react-router-dom'
 
 export class Header extends Component {
   render() {
@@ -41,17 +42,17 @@ export class Header extends Component {
           >
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
-                <a className="nav-link" href="#">
-                  <i className="fab fa-facebook-f" /> Facebook
-                  <span className="sr-only">(current)</span>
-                </a>
+                <NavLink className="nav-link" to="/login">
+                  <i className="fab fa-facebook-f" /> Login
+                  {/* <span className="sr-only">(current)</span> */}
+                </NavLink>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
-                  <i className="fab fa-instagram" /> Instagram
+                  <i className="fab fa-instagram" /> Post AD
                 </a>
               </li>
-              <li className="nav-item dropdown">
+              {/* <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
                   id="navbarDropdownMenuLink-4"
@@ -72,7 +73,7 @@ export class Header extends Component {
                     Log out
                   </a>
                 </div>
-              </li>
+              </li> */}
             </ul>
           </div>
         </nav>
