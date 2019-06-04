@@ -4,7 +4,7 @@ export class Footer extends Component {
   render() {
     return (
       <div>
-        {/* <!-- Footer --> */}
+      
         <footer className="page-footer font-small blue pt-4">
           {/* <!-- Footer Links --> */}
           <div className="container-fluid text-center text-md-left">
