@@ -4,6 +4,7 @@ import Login from './Login';
 export class User extends Component {
     render() {
         return (
+            <div></div>
               )
     }
 }
