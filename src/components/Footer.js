@@ -13,11 +13,12 @@ export class Footer extends Component {
               {/* <!-- Grid column --> */}
               <div className="col-md-6 mt-md-0 mt-3">
                 {/* <!-- Content --> */}
-                <h5 className="text-uppercase">Footer Content</h5>
+                <h5 className="text-uppercase font-weight-bold">Purpose of this Web App</h5>
                 <p>
-                  Here you can use rows and columns to organize your footer
-                  content.
+                  The purpose of the online advertisement system is to ease the process of selling and buying items within an organization. We will have database to support advertisements over all the geographical locations where the organization is operational.
                 </p>
+
+
               </div>
               {/* <!-- Grid column --> */}
 
@@ -26,20 +27,23 @@ export class Footer extends Component {
               {/* <!-- Grid column --> */}
               <div className="col-md-3 mb-md-0 mb-3">
                 {/* <!-- Links --> */}
-                <h5 className="text-uppercase">Links</h5>
+                <h5 className="text-uppercase">Trending Location</h5>
 
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#!">Link 1</a>
+                    Banglore
                   </li>
                   <li>
-                    <a href="#!">Link 2</a>
+                    Pune
                   </li>
                   <li>
-                    <a href="#!">Link 3</a>
+                    Kolkata
                   </li>
                   <li>
-                    <a href="#!">Link 4</a>
+                    Mumbai
+                  </li>
+                  <li>
+                    Patna
                   </li>
                 </ul>
               </div>
@@ -48,20 +52,23 @@ export class Footer extends Component {
               {/* <!-- Grid column --> */}
               <div className="col-md-3 mb-md-0 mb-3">
                 {/* <!-- Links --> */}
-                <h5 className="text-uppercase">Links</h5>
+                <h5 className="text-uppercase">Devlopers</h5>
 
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#!">Link 1</a>
+                    <a href="#!">Abhishek Kumar</a>
                   </li>
                   <li>
-                    <a href="#!">Link 2</a>
+                    <a href="#!">Sumit Kumar</a>
                   </li>
                   <li>
-                    <a href="#!">Link 3</a>
+                    <a href="#!">Rohan Majumdar</a>
                   </li>
                   <li>
-                    <a href="#!">Link 4</a>
+                    <a href="#!">Nagarjun Yadav</a>
+                  </li>
+                  <li>
+                    <a href="#!">Chandana</a>
                   </li>
                 </ul>
               </div>
