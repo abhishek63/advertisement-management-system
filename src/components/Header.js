@@ -48,9 +48,9 @@ export class Header extends Component {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  <i className="fab fa-instagram" /> Post AD
-                </a>
+                <NavLink className="nav-link" to="/addpost">
+                  <span>  <i class="fa fa-plus"></i> Post Ad</span>
+                </NavLink>
               </li>
               {/* <li className="nav-item dropdown">
                 <a

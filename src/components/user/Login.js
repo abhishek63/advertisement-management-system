@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {NavLink} from 'react-router-dom'
 
 export class Login extends Component {
   render() {
@@ -65,7 +66,7 @@ export class Login extends Component {
 
                                 <p>
                                     Not a member?
-              <a href="">Register</a>
+              <NavLink to="/register">Register</NavLink>
                                 </p>
 
                                 <p>or sign in with:</p>

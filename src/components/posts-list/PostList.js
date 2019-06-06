@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {NavLink} from 'react-router-dom'
 import Category from "./Category";
 
 export class PostList extends Component {
@@ -40,9 +41,9 @@ export class PostList extends Component {
                       make up the bulk of the card's content.
                     </p>
                     {/* <!-- Provides extra visual weight and identifies the primary action in a set of buttons --> */}
-                    <button type="button" className="btn btn-light-blue btn-md">
-                      Read more
-                    </button>
+                    <NavLink to="/post" className="btn btn-light-blue btn-md">
+                      View Ad
+                    </NavLink>
                   </div>
                 </div>
                 {/* <!-- Card --> */}
@@ -71,9 +72,9 @@ export class PostList extends Component {
                       make up the bulk of the card's content.
                     </p>
                     {/* <!-- Provides extra visual weight and identifies the primary action in a set of buttons --> */}
-                    <button type="button" className="btn btn-light-blue btn-md">
-                      Read more
-                    </button>
+                    <NavLink to="/post" className="btn btn-light-blue btn-md">
+                      View Ad
+                    </NavLink>
                   </div>
                 </div>
                 {/* <!-- Card --> */}
@@ -102,9 +103,9 @@ export class PostList extends Component {
                       make up the bulk of the card's content.
                     </p>
                     {/* <!-- Provides extra visual weight and identifies the primary action in a set of buttons --> */}
-                    <button type="button" className="btn btn-light-blue btn-md">
-                      Read more
-                    </button>
+                    <NavLink to="/post" className="btn btn-light-blue btn-md">
+                      View Ad
+                    </NavLink>
                   </div>
                 </div>
                 {/* <!-- Card --> */}
@@ -138,9 +139,10 @@ export class PostList extends Component {
                       make up the bulk of the card's content.
                     </p>
                     {/* <!-- Provides extra visual weight and identifies the primary action in a set of buttons --> */}
-                    <button type="button" className="btn btn-light-blue btn-md">
-                      Read more
-                    </button>
+              
+                    <NavLink to="/post" className="btn btn-light-blue btn-md">
+                      View Ad
+                    </NavLink>
                   </div>
                 </div>
                 {/* <!-- Card --> */}
@@ -169,9 +171,9 @@ export class PostList extends Component {
                       make up the bulk of the card's content.
                     </p>
                     {/* <!-- Provides extra visual weight and identifies the primary action in a set of buttons --> */}
-                    <button type="button" className="btn btn-light-blue btn-md">
-                      Read more
-                    </button>
+                    <NavLink to="/post" className="btn btn-light-blue btn-md">
+                      View Ad
+                    </NavLink>
                   </div>
                 </div>
                 {/* <!-- Card --> */}
@@ -200,9 +202,9 @@ export class PostList extends Component {
                       make up the bulk of the card's content.
                     </p>
                     {/* <!-- Provides extra visual weight and identifies the primary action in a set of buttons --> */}
-                    <button type="button" className="btn btn-light-blue btn-md">
-                      Read more
-                    </button>
+                    <NavLink to="/post" className="btn btn-light-blue btn-md">
+                      View Ad
+                    </NavLink>
                   </div>
                 </div>
                 {/* <!-- Card --> */}
