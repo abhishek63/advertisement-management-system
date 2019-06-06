@@ -9,43 +9,69 @@ export class Register extends Component {
         this.state = {
             firstName: "",
             lastName: "",
-            gender:"",
+            gender: "",
             email: "",
             password: "",
             phone: "",
             city: "",
-            address: ""
+            address: "",
+            error: "",
+            success: false
         }
     }
 
     handleChange = name => event => {
+        this.setState({ error: "" })
         this.setState({
             [name]: event.target.value
         })
     }
 
-    onClickSubmit = event=>{
+    onClickSubmit = event => {
         event.preventDefault();
-        const {firstName,lastName,email,password,phone,city,address,gender}= this.state;
-        const user= {
-            firstName,lastName,email,password,phone,city,address,gender
+        const { firstName, lastName, email, password, phone, city, address, gender } = this.state;
+        const user = {
+            firstName, lastName, email, password, phone, city, address, gender
         }
 
         console.log(user);
 
-        fetch("http://localhost:4000/api/signup",{
-            method : "POST",
-            headers : {
-                Accept : "application/json",
-                "Content-Type" : "application/json"
-            },
-            body : JSON.stringify(user)
-        })
-        .then(response =>{
-            return response.json()
-        })
-        .catch(err=>console.log(err))
+        this.signup(user).then(data => {
+            if (data.error)
+                this.setState({ error: data.error })
+            else {
+                this.setState({
+                    firstName: "",
+                    lastName: "",
+                    gender: "",
+                    email: "",
+                    password: "",
+                    phone: "",
+                    city: "",
+                    address: "",
+                    error: "",
+                    success: true
+                })
 
+            }
+
+        })
+
+    }
+
+    signup(user) {
+        return fetch("http://localhost:4000/api/signup", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(response => {
+                return response.json()
+            })
+            .catch(err => console.log(err))
     }
 
     render() {
@@ -60,11 +86,14 @@ export class Register extends Component {
                             <NavLink to="/login"><input type="submit" name="" value="Login" /></NavLink><br />
                         </div>
                         <div className="col-md-9 register-right">
+
                             <div className="tab-content" id="myTabContent">
                                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <h3 className="register-heading">Create Account</h3>
+
                                     <div className="row register-form">
                                         <div className="col-md-6">
+
                                             <div className="form-group">
                                                 <input type="text" className="form-control" placeholder="First Name *" onChange={this.handleChange("firstName")} value={this.state.firstName} />
                                             </div>
@@ -74,9 +103,9 @@ export class Register extends Component {
                                             <div className="form-group">
                                                 <input type="password" className="form-control" placeholder="Password *" onChange={this.handleChange("password")} value={this.state.password} />
                                             </div>
-                                            {/* <div className="form-group">
+                                            <div className="form-group">
                                                 <input type="password" className="form-control" placeholder="Confirm Password *" value={this.state.confirmPassword} />
-                                            </div> */}
+                                            </div>
                                             <div className="form-group">
                                                 <div className="maxl">
                                                     <label className="radio inline">
@@ -84,18 +113,21 @@ export class Register extends Component {
                                                         <span> Male </span>
                                                     </label>
                                                     <label className="radio inline">
-                                                        <input type="radio" name="gender" value="female" onChange={this.handleChange("gender")}/>
+                                                        <input type="radio" name="gender" value="female" onChange={this.handleChange("gender")} />
                                                         <span>Female </span>
                                                     </label>
                                                 </div>
                                             </div>
+                                            <span style={{ display: this.state.error ? "" : "none", color: "red" }}>{this.state.error}</span>
+
+                                            <span style={{ display: this.state.success ? "" : "none", color: "red" }}>Account is successfully created</span>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <input type="email" className="form-control" onChange={this.handleChange("email")} placeholder="Your Email *" value={this.state.email} />
                                             </div>
                                             <div className="form-group">
-                                                <input type="text" name="txtEmpPhone" className="form-control" onChange={this.handleChange("phone")} placeholder="Your Phone *" value={this.state.phone}/>
+                                                <input type="text" name="txtEmpPhone" className="form-control" onChange={this.handleChange("phone")} placeholder="Your Phone *" value={this.state.phone} />
                                             </div>
                                             <div className="form-group">
                                                 <select className="form-control" onChange={this.handleChange("city")} value={this.state.city}>
@@ -111,6 +143,7 @@ export class Register extends Component {
                                             </div>
                                             <input type="submit" onClick={this.onClickSubmit} className="btnRegister" value="Register" />
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

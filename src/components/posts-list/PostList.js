@@ -10,7 +10,7 @@ export class PostList extends Component {
             <Category />
           </div>
           <div className="col-sm-9">
-            <div class="alert alert-primary" role="alert">
+            <div className="alert alert-primary" role="alert">
               Latest Recomendations{" "}
             </div>
             <div>
