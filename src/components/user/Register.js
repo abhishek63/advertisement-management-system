@@ -1,100 +1,122 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 
+import './register.css'
 export class Register extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            firstName: "",
+            lastName: "",
+            gender:"",
+            email: "",
+            password: "",
+            phone: "",
+            city: "",
+            address: ""
+        }
+    }
+
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value
+        })
+    }
+
+    onClickSubmit = event=>{
+        event.preventDefault();
+        const {firstName,lastName,email,password,phone,city,address,gender}= this.state;
+        const user= {
+            firstName,lastName,email,password,phone,city,address,gender
+        }
+
+        console.log(user);
+
+        fetch("http://localhost:4000/api/signup",{
+            method : "POST",
+            headers : {
+                Accept : "application/json",
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(user)
+        })
+        .then(response =>{
+            return response.json()
+        })
+        .catch(err=>console.log(err))
+
+    }
+
     render() {
         return (
             <div>
-                <div className="container">
+                <div className="container register">
                     <div className="row">
-                        <div className="col-sm-3"></div>
-                        <div className="col-sm-6">
-                            <div className="card">
-
-                                <h5 className="card-header info-color white-text text-center py-4">
-                                    <strong>Sign up</strong>
-                                </h5>
-
-
-                                <div className="card-body px-lg-5 pt-0">
-
-
-                                    <form className="text-center">
-
-                                        <div className="form-row">
-                                            <div className="col">
-
-                                                <div className="md-form">
-                                                    <input type="text" id="materialRegisterFormFirstName" className="form-control" />
-                                                    <label for="materialRegisterFormFirstName">Name</label>
+                        <div className="col-md-3 register-left">
+                            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+                            <h3>Welcome</h3>
+                            <p>You are 30 seconds away from posting your own ad!</p>
+                            <NavLink to="/login"><input type="submit" name="" value="Login" /></NavLink><br />
+                        </div>
+                        <div className="col-md-9 register-right">
+                            <div className="tab-content" id="myTabContent">
+                                <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <h3 className="register-heading">Create Account</h3>
+                                    <div className="row register-form">
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <input type="text" className="form-control" placeholder="First Name *" onChange={this.handleChange("firstName")} value={this.state.firstName} />
+                                            </div>
+                                            <div className="form-group">
+                                                <input type="text" className="form-control" placeholder="Last Name *" onChange={this.handleChange("lastName")} value={this.state.lastName} />
+                                            </div>
+                                            <div className="form-group">
+                                                <input type="password" className="form-control" placeholder="Password *" onChange={this.handleChange("password")} value={this.state.password} />
+                                            </div>
+                                            {/* <div className="form-group">
+                                                <input type="password" className="form-control" placeholder="Confirm Password *" value={this.state.confirmPassword} />
+                                            </div> */}
+                                            <div className="form-group">
+                                                <div className="maxl">
+                                                    <label className="radio inline">
+                                                        <input type="radio" name="gender" value="male" onChange={this.handleChange("gender")} />
+                                                        <span> Male </span>
+                                                    </label>
+                                                    <label className="radio inline">
+                                                        <input type="radio" name="gender" value="female" onChange={this.handleChange("gender")}/>
+                                                        <span>Female </span>
+                                                    </label>
                                                 </div>
                                             </div>
-
                                         </div>
-
-
-                                        <div className="md-form mt-0">
-                                            <input type="email" id="materialRegisterFormEmail" className="form-control" />
-                                            <label for="materialRegisterFormEmail">E-mail</label>
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <input type="email" className="form-control" onChange={this.handleChange("email")} placeholder="Your Email *" value={this.state.email} />
+                                            </div>
+                                            <div className="form-group">
+                                                <input type="text" name="txtEmpPhone" className="form-control" onChange={this.handleChange("phone")} placeholder="Your Phone *" value={this.state.phone}/>
+                                            </div>
+                                            <div className="form-group">
+                                                <select className="form-control" onChange={this.handleChange("city")} value={this.state.city}>
+                                                    <option className="hidden" value="" disabled>Please select your current city</option>
+                                                    <option value="Pune">Pune</option>
+                                                    <option value="Kolkata">Kolkata</option>
+                                                    <option value="Patna">Patna</option>
+                                                    <option value="Banglore">Banglore</option>
+                                                </select>
+                                            </div>
+                                            <div className="form-group">
+                                                <input type="text" className="form-control" onChange={this.handleChange("address")} placeholder="Address *" value={this.state.address} />
+                                            </div>
+                                            <input type="submit" onClick={this.onClickSubmit} className="btnRegister" value="Register" />
                                         </div>
-
-
-                                        <div className="md-form">
-                                            <input type="password" id="materialRegisterFormPassword" className="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" />
-                                            <label for="materialRegisterFormPassword">Password</label>
-                                            <small id="materialRegisterFormPasswordHelpBlock" className="form-text text-muted mb-4">
-                                                At least 8 characters and 1 digit
-                                                </small>
-                                        </div>
-                                        <div className="md-form">
-                                            <input type="password" id="materialRegisterFormPassword" className="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" />
-                                            <label for="materialRegisterFormPassword">Confirm Password</label>
-                                            <small id="materialRegisterFormPasswordHelpBlock" className="form-text text-muted mb-4">
-                                                At least 8 characters and 1 digit
-                                                </small>
-                                        </div>
-
-
-                                        <div className="md-form">
-                                            <input type="password" id="materialRegisterFormPhone" className="form-control" aria-describedby="materialRegisterFormPhoneHelpBlock" />
-                                            <label for="materialRegisterFormPhone">Phone number</label>
-                                            <small id="materialRegisterFormPhoneHelpBlock" className="form-text text-muted mb-4">
-                                                Optional - for two step authentication
-                                </small>
-                                        </div>
-                                        <button className="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
-
-
-                                        <p>or sign up with:</p>
-
-                                        <a type="button" className="btn-floating btn-fb btn-sm">
-                                            <i className="fab fa-facebook-f"></i>
-                                        </a>
-                                        <a type="button" className="btn-floating btn-tw btn-sm">
-                                            <i className="fab fa-twitter"></i>
-                                        </a>
-                                        <a type="button" className="btn-floating btn-li btn-sm">
-                                            <i className="fab fa-linkedin-in"></i>
-                                        </a>
-                                        <a type="button" className="btn-floating btn-git btn-sm">
-                                            <i className="fab fa-github"></i>
-                                        </a>
-
-                                        <hr>
-
-                                        </hr>
-                                        <p>By clicking</p>
-                                        <em>Sign up</em> you agree to our
-                                <a href="" target="_blank">terms of service</a>
-
-                                    </form>
-
-
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
-                        <div className="col-sm-3"></div>
                     </div>
+
                 </div>
             </div>
 

@@ -9,17 +9,17 @@ export class Header extends Component {
           <a className="navbar-brand" href="#">
           <img src={process.env.PUBLIC_URL + '/assets/logo.png'} width="90" height="25"/>
           </a>
-          <form class="form-inline">
-            <div class="md-form my-0">
+          <form className="form-inline">
+            <div className="md-form my-0">
               <input
-                class="form-control mr-sm-6"
+                className="form-control mr-sm-6"
                 type="text"
                 placeholder="Find car, mobile and many more"
                 aria-label="Search"
               />
             </div>
             <button
-              class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3"
+              className="btn btn-outline-white btn-md my-2 my-sm-0 ml-3"
               type="submit"
             >
               Search
@@ -41,7 +41,7 @@ export class Header extends Component {
             id="navbarSupportedContent-4"
           >
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
+              <li className="nav-item">
                 <NavLink className="nav-link" to="/login">
                   <i className="fab fa-facebook-f" /> Login
                   {/* <span className="sr-only">(current)</span> */}
