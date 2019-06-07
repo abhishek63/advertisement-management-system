@@ -1,19 +1,92 @@
 import React, { Component } from "react";
-import {NavLink} from 'react-router-dom'
+import { NavLink,Redirect } from 'react-router-dom'
 
 export class Login extends Component {
-  render() {
-    return (
-      <div className="container">
+
+    constructor() {
+        super();
+
+        this.state = {
+            email: "",
+            password: "",
+            error: "",
+            redirectToReferer: false
+        }
+    }
+
+    handleChange = name => event => {
+        this.setState({ error: "" })
+        this.setState({
+            [name]: event.target.value
+        })
+    }
+
+    authenticate = (jwt, next) => {
+        if (typeof window != "undefined") {
+            localStorage.setItem("jwt", JSON.stringify(jwt))
+            next();
+        }
+
+    }
+
+    onSubmit = (event) => {
+        event.preventDefault();
+        const { email, password } = this.state
+
+        const user = {
+            email,
+            password
+        }
+
+        this.singin(user).then(data => {
+            if (data.error) {
+                this.setState({
+                    error: data.error
+                })
+            }
+            else {
+                //authenticate
+                this.authenticate(data, () => {
+                    this.setState({ redirectToReferer: true })
+                })
+
+                //redirect
+            }
+        })
+    }
+
+    singin(user) {
+        return fetch("http://localhost:4000/api/signin", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(response => {
+                return response.json()
+            })
+            .catch(err => console.log(err))
+
+    }
+
+    render() {
+        if(this.state.redirectToReferer){
+            return <Redirect to="/" />
+        }
+        return (
+            <div className="container">
                 <div className="row">
                     <div className="col-sm-4">
 
                     </div>
                     <div className="col-sm-4">
                         <div class="card">
-                            <h5 class="card-header info-color white-text text-center py-4">
-                                <strong>Sign in</strong>
-                            </h5>
+                            <div class="card-header info-color white-text text-center py-4">
+                                <h5><strong>Sign in</strong></h5>
+                                <div class="alert alert-danger" style={{ display: this.state.error ? "" : "none" }}>{this.state.error}</div>
+                            </div>
 
                             <div class="card-body px-lg-5 pt-0">
                                 <form class="text-center" style={{ "color": "#757575" }}>
@@ -22,6 +95,8 @@ export class Login extends Component {
                                             type="email"
                                             id="materialLoginFormEmail"
                                             class="form-control"
+                                            onChange={this.handleChange("email")}
+                                            value={this.state.email}
                                         />
                                         <label for="materialLoginFormEmail">E-mail</label>
                                     </div>
@@ -31,6 +106,8 @@ export class Login extends Component {
                                             type="password"
                                             id="materialLoginFormPassword"
                                             class="form-control"
+                                            onChange={this.handleChange("password")}
+                                            value={this.state.password}
                                         />
                                         <label for="materialLoginFormPassword">Password</label>
                                     </div>
@@ -59,6 +136,8 @@ export class Login extends Component {
                                     <button
                                         class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
                                         type="submit"
+                                        onClick={this.onSubmit}
+
                                     >
                                         Sign in
               </button>
@@ -91,9 +170,9 @@ export class Login extends Component {
                     </div>
                 </div>
             </div>
-      
-    );
-  }
+
+        );
+    }
 }
 
 export default Login;

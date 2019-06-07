@@ -1,13 +1,45 @@
 import React, { Component } from "react";
-import {NavLink} from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
 export class Header extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  signout = (next) => {
+
+    if (typeof window !== "undefined")
+      localStorage.removeItem("jwt")
+
+    next();
+
+    return fetch("http://localhost:4000/api/signout", {
+      method: "GET"
+
+    }).then(response => {
+      console.log("signout", response)
+      return response.json()
+    })
+  }
+
+  isAuthenticated = () => {
+    if (typeof window == "undefined") {
+      return false
+    }
+    if (localStorage.getItem("jwt")) {
+      return JSON.parse(localStorage.getItem("jwt"))
+    }
+    else {
+      return false;
+    }
+  }
+
   render() {
     return (
       <div>
         <nav className="mb-1 navbar navbar-expand-lg navbar-dark info-color">
           <a className="navbar-brand" href="#">
-          <img src={process.env.PUBLIC_URL + '/assets/logo.png'} width="90" height="25"/>
+            <img src={process.env.PUBLIC_URL + '/assets/logo.png'} width="90" height="25" />
           </a>
           <form className="form-inline">
             <div className="md-form my-0">
@@ -41,17 +73,40 @@ export class Header extends Component {
             id="navbarSupportedContent-4"
           >
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/login">
-                  <i className="fab fa-facebook-f" /> Login
-                  {/* <span className="sr-only">(current)</span> */}
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/addpost">
-                  <span>  <i class="fa fa-plus"></i> Post Ad</span>
-                </NavLink>
-              </li>
+              {
+                !this.isAuthenticated() && (<>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/login">
+                      <i className="fab fa-facebook-f" /> Login
+              {/* <span className="sr-only">(current)</span> */}
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/register">
+                      <i className="fab fa-facebook-f" /> Sign Up
+              {/* <span className="sr-only">(current)</span> */}
+                    </NavLink>
+                  </li>
+                </>)
+              }
+
+              {
+                this.isAuthenticated() && (
+                  <>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" to="/addpost">
+                        <span>  <i class="fa fa-plus"></i> Post Ad</span>
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" onClick={() => { this.signout(() => { this.props.history.push('/') }) }}>
+                        <span>  sign out</span>
+                      </NavLink>
+                    </li>
+                  </>
+                )
+              }
+
               {/* <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
@@ -82,4 +137,4 @@ export class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);
