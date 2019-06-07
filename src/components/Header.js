@@ -103,6 +103,11 @@ export class Header extends Component {
                         <span>  sign out</span>
                       </NavLink>
                     </li>
+                    <li className="nav-item">
+                      <NavLink className="nav-link">
+                        <span>{this.isAuthenticated().user.name}</span>
+                      </NavLink>
+                    </li>
                   </>
                 )
               }
