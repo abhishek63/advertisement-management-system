@@ -15,7 +15,7 @@ export class MainRouter extends Component {
                 <Route path="/" exact component={PostList}></Route>
                 <Route path="/login" exact component={Login}></Route>
                 <Route path="/register" component={Register}></Route>
-                <Route path="/profile" component={UserProfile}></Route>
+                <Route path="/profile/:userId" component={UserProfile}></Route>
                 <Route path="/addpost" component={AddPost}></Route>
                 <Route path="/post" component={Post}></Route>
 

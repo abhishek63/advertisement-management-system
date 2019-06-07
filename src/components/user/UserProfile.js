@@ -1,8 +1,37 @@
 import React, { Component } from 'react'
 import './UserProfile.css'
 import UserPost from './UserPost';
+import {isAuthenticated} from "../../auth/index"
 
 export class UserProfile extends Component {
+    constructor(){
+        super()
+        this.state = {
+            user : {},
+
+
+        }
+    }
+
+    componentDidMount(){
+       const id = this.props.match.params.userId;
+       console.log(id)
+       fetch(`http://localhost:4000/api/user/${id}`,{
+           method : "GET",
+           headers : {
+               Accept : "application/json",
+               "Content-Type" : "application/json",
+               "Authorization" : `Bearer ${isAuthenticated().token}`
+           }
+       })
+       .then(response =>{
+           return response.json()
+       })
+       .then(data =>{
+           console.log(data)
+       })
+    }
+
     render() {
         return (
             <div>

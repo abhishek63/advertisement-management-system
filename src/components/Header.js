@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from 'react-router-dom'
+import {isAuthenticated} from "../auth/"
 
 export class Header extends Component {
   constructor(props) {
@@ -22,17 +23,7 @@ export class Header extends Component {
     })
   }
 
-  isAuthenticated = () => {
-    if (typeof window == "undefined") {
-      return false
-    }
-    if (localStorage.getItem("jwt")) {
-      return JSON.parse(localStorage.getItem("jwt"))
-    }
-    else {
-      return false;
-    }
-  }
+  
 
   render() {
     return (
@@ -74,7 +65,7 @@ export class Header extends Component {
           >
             <ul className="navbar-nav ml-auto">
               {
-                !this.isAuthenticated() && (<>
+                !isAuthenticated() && (<>
                   <li className="nav-item">
                     <NavLink className="nav-link" to="/login">
                       <i className="fab fa-facebook-f" /> Login
@@ -91,7 +82,7 @@ export class Header extends Component {
               }
 
               {
-                this.isAuthenticated() && (
+                isAuthenticated() && (
                   <>
                     <li className="nav-item">
                       <NavLink className="nav-link" to="/addpost">
@@ -105,7 +96,7 @@ export class Header extends Component {
                     </li>
                     <li className="nav-item">
                       <NavLink className="nav-link">
-                        <span>{this.isAuthenticated().user.name}</span>
+                        <span>{isAuthenticated().user.name}</span>
                       </NavLink>
                     </li>
                   </>
